@@ -39,7 +39,13 @@ export default function VideoPlayer({ kind = 'file', src, videoId, title = 'Vide
             aria-label={title}
           >
             <source src={src} />
-            {/* Placeholder track entry for future captions */}
+            <track
+              kind="captions"
+              src="/captions/pitch.vtt"
+              srcLang="en"
+              label="English"
+              default
+            />
           </video>
         ) : (
           <div className="h-full w-full flex items-center justify-center">
@@ -50,4 +56,3 @@ export default function VideoPlayer({ kind = 'file', src, videoId, title = 'Vide
     </div>
   )
 }
-
