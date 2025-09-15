@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/media-has-caption */
+
 type VideoPlayerProps = {
   kind?: 'file' | 'youtube' | 'vimeo'
   src?: string
