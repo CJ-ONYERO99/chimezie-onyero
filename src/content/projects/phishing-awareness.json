@@ -1,0 +1,18 @@
+{
+  "slug": "phishing-awareness",
+  "title": "Phishing Awareness One‑Pager (Sample)",
+  "summary": "A concise one‑pager with a short quiz to help non‑technical users.",
+  "role": "Contributor",
+  "tools": ["Markdown", "Canva/Illustrator"],
+  "highlights": [
+    "Plain‑language explanations",
+    "Checklist for email safety",
+    "Link to short quiz",
+    "Basic view metrics"
+  ],
+  "links": {"github": "https://github.com/<username>/phishing-awareness", "demo": "#"},
+  "cover": "/images/projects/placeholder.svg",
+  "date": "2025-03-08",
+  "tags": ["sample", "security", "awareness"]
+}
+

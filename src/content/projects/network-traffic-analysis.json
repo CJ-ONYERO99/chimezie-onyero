@@ -1,0 +1,17 @@
+{
+  "slug": "network-traffic-analysis",
+  "title": "Network Traffic Analysis Lab (Sample)",
+  "summary": "Captured and inspected packets to identify anomalies and suspicious DNS.",
+  "role": "Student / Analyst",
+  "tools": ["Wireshark", "Python", "Scapy"],
+  "highlights": [
+    "Built focused capture filters",
+    "Flagged suspicious DNS queries",
+    "Documented remediation checklist"
+  ],
+  "links": {"github": "https://github.com/<username>/network-traffic-lab", "demo": "#"},
+  "cover": "/images/projects/placeholder.svg",
+  "date": "2025-06-01",
+  "tags": ["sample", "security", "network"]
+}
+

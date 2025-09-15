@@ -1,0 +1,18 @@
+{
+  "slug": "secure-login-prototype",
+  "title": "Secure Login Prototype (Sample)",
+  "summary": "Explored client/server validation and password policy in a basic login flow.",
+  "role": "Student / Developer",
+  "tools": ["Next.js", "Auth.js", "Zod"],
+  "highlights": [
+    "Form schema validation with Zod",
+    "Server‑side checks and helpful errors",
+    "Password policy and strength hints",
+    "Temporary lockout on brute force attempts"
+  ],
+  "links": {"github": "https://github.com/<username>/secure-login-prototype", "demo": "#"},
+  "cover": "/images/projects/placeholder.svg",
+  "date": "2025-04-01",
+  "tags": ["sample", "auth", "security"]
+}
+
