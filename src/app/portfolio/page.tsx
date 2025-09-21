@@ -1,73 +1,119 @@
-"use client"
-
-import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import ProjectCard from '@/components/ProjectCard'
+import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { getAllProjectsClient } from '@/lib/projects-client'
-import type { Project } from '@/types/project'
 
-const TAGS = ['Network', 'Web', 'Auth', 'Awareness', 'Tools', 'sample']
+type PortfolioProject = {
+  title: string
+  objective: string
+  tools: string
+  process: string[]
+  findings: string[]
+  reflection: string
+  placeholderCaption: string
+}
+
+const PROJECTS: PortfolioProject[] = [
+  {
+    title: 'Investigating a Suspicious IP Address (Defensive Path)',
+    objective: 'Analyze a suspicious login attempt by investigating the IP address 102.165.36.250 to determine its origin and potential threat.',
+    tools: 'ipinfo.io, SecurityTrails',
+    process: [
+      'Collected the suspicious IP from a simulated login alert.',
+      'Queried the IP address on ipinfo for geolocation, ISP, and hostname details.',
+      'Entered the IP into SecurityTrails for domain associations and hosting information.',
+      'Compared the findings with normal user activity.'
+    ],
+    findings: [
+      'IP registered in [insert country] and associated with [organization/hosting provider].',
+      'Likely a server/data center, suggesting possible automated or malicious use.'
+    ],
+    reflection: 'Learned initial SOC triage and how to distinguish normal user traffic from suspicious hosts.',
+    placeholderCaption: 'Replace with your screenshot of ipinfo/SecurityTrails.'
+  },
+  {
+    title: 'Finding a Hidden Flag in a Website (Offensive Path)',
+    objective: 'Identify hidden information in a website’s source code.',
+    tools: 'Web browser (Chrome/Brave/Safari)',
+    process: [
+      'Viewed Page Source.',
+      'Used Ctrl+F (Cmd+F) to search for “flag”.',
+      'Reviewed HTML comments and hidden tags.'
+    ],
+    findings: ['flag{h1dd3n_1n_pl41n_s1ght}'],
+    reflection: 'Shows how recon starts with source-code review and reinforces secure coding and code reviews.',
+    placeholderCaption: 'Replace with your screenshot of source code + flag.'
+  },
+  {
+    title: 'Domain Intelligence Gathering (OSINT Path)',
+    objective: 'Perform DNS enumeration on ibm.com to understand its infrastructure.',
+    tools: 'MXToolbox SuperTool',
+    process: [
+      'Entered ibm.com into MXToolbox SuperTool.',
+      'Ran a DNS Check to find IP addresses.',
+      'Retrieved MX Records for IBM’s mail servers.',
+      'Noted additional DNS records for insights.'
+    ],
+    findings: [
+      'Multiple IPs indicate redundancy/load balancing.',
+      'MX Records show secure, distributed email routing for a large enterprise.'
+    ],
+    reflection: 'Intro to digital footprinting via open-source DNS data.',
+    placeholderCaption: 'Replace with your screenshot from MXToolbox.'
+  }
+]
 
 export default function PortfolioPage() {
-  const [projects, setProjects] = useState<Project[]>([])
-  const search = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-  const tag = search.get('tag') || ''
-
-  useEffect(() => {
-    getAllProjectsClient().then(setProjects)
-  }, [])
-
-  const filtered = useMemo(() => {
-    if (!tag) return projects
-    const lowerTag = tag.toLowerCase()
-    return projects.filter((p) =>
-      ((p.tags ?? []) as string[])
-        .map((x: string) => x.toLowerCase())
-        .some((t: string) => t === lowerTag)
-    )
-  }, [projects, tag])
-
-  function setTag(next?: string) {
-    const params = new URLSearchParams(search.toString())
-    if (!next) params.delete('tag')
-    else params.set('tag', next)
-    router.push(pathname + '?' + params.toString())
-  }
-
   return (
     <Container>
       <Section title="My Portfolio" subtitle="Selected cybersecurity‑oriented samples and case studies">
-        <div className="mb-6 flex flex-wrap gap-3">
-          <button
-            aria-current={!tag ? 'page' : undefined}
-            className={`px-4 py-2 rounded-full text-sm shadow-soft transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--focus)]
-              ${!tag ? 'bg-[color:var(--accent-crimson)] text-white border border-transparent' : 'bg-transparent border border-[color:var(--border)] hover:bg-black/10'}`}
-            onClick={() => setTag(undefined)}
-          >All</button>
-          {TAGS.map((t) => (
-            <button
-              key={t}
-              aria-current={tag === t ? 'page' : undefined}
-              className={`px-4 py-2 rounded-full text-sm shadow-soft transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--focus)]
-                ${tag === t ? 'bg-[color:var(--accent-crimson)] text-white border border-transparent' : 'bg-transparent border border-[color:var(--border)] hover:bg-black/10'}`}
-              onClick={() => setTag(t)}
-            >{t}</button>
+        <div className="space-y-12">
+          {PROJECTS.map((project, index) => (
+            <article key={project.title} className="card p-6 md:p-8 space-y-6">
+              <header className="space-y-3">
+                <h3 className="text-2xl font-semibold text-[color:var(--text-primary)]">{project.title}</h3>
+                <div className="space-y-1 text-sm text-[color:var(--text-muted)]">
+                  <p><span className="font-semibold text-[color:var(--text-primary)]">Objective:</span> {project.objective}</p>
+                  <p><span className="font-semibold text-[color:var(--text-primary)]">Tools:</span> {project.tools}</p>
+                </div>
+              </header>
+
+              <figure className="overflow-hidden rounded-xl border border-dashed border-[color:var(--border)] bg-[color:var(--surface)]">
+                <Image
+                  src={`/images/placeholders/portfolio-${index + 1}.png`}
+                  alt="Screenshot placeholder"
+                  width={1200}
+                  height={675}
+                  className="h-full w-full object-cover"
+                />
+                <figcaption className="px-4 py-3 text-center text-sm text-[color:var(--text-muted)]">{project.placeholderCaption}</figcaption>
+              </figure>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Process</h4>
+                  <ol className="list-decimal pl-5 space-y-2 text-sm text-[color:var(--text-muted)]">
+                    {project.process.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Findings</h4>
+                  <ul className="list-disc pl-5 space-y-2 text-sm text-[color:var(--text-muted)]">
+                    {project.findings.map((finding) => (
+                      <li key={finding}>{finding}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Reflection</h4>
+                  <p className="text-[color:var(--text-muted)]">{project.reflection}</p>
+                </div>
+              </div>
+            </article>
           ))}
-        </div>
-        <div className="h-px bg-gradient-to-r from-transparent via-[color:var(--border)] to-transparent opacity-70 mb-6" aria-hidden />
-        <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)]/40 backdrop-blur p-4 md:p-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:24px_24px] rounded-xl p-2">
-            {filtered.map((p) => (
-              <Link key={p.slug} href={`/portfolio/${p.slug}`} aria-label={`${p.title} details`}>
-                <ProjectCard project={p} />
-              </Link>
-            ))}
-          </div>
         </div>
       </Section>
     </Container>

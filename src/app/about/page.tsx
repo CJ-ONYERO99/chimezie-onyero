@@ -12,13 +12,10 @@ export default function AboutPage() {
           <div className="md:col-span-2 space-y-6">
             <h2 className="text-2xl sm:text-3xl font-semibold">My Bio</h2>
             <p className="leading-relaxed">
-              I am <strong>Chimezie Onyero</strong> from Nigeria. I’m enrolled in the <strong>ALX Cybersecurity</strong> and
-              <strong> Professional Foundations</strong> programmes and hold a <strong>B.Eng</strong> from the University of Nigeria, Nsukka.
-              I also participated in the ALX Software Engineering Programme, which shaped my approach to problem‑solving and collaboration.
+              I am an aspiring cybersecurity professional passionate about protecting digital systems through investigation, defense, and ethical hacking. I enjoy exploring how attackers think while building the skills to stop them. My interests currently span defensive security (Blue Team), open-source intelligence (OSINT), and penetration testing.
             </p>
             <p className="leading-relaxed">
-              I enjoy writing, basketball, volunteering in tech projects, and entrepreneurship. I’m focused on foundational security
-              principles, safe development practices, and clear communication. My goal is to help teams improve trust and security.
+              I bring an analytical, curious, and proactive mindset to every project and am committed to continuous growth in this fast-changing field.
             </p>
             {/* Skills section removed */}
           </div>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import ProjectCard from '@/components/ProjectCard'
 import ThemeToggle from '@/components/ui/ThemeToggle'
@@ -24,4 +25,3 @@ describe('ThemeToggle', () => {
     render(<ThemeToggle />)
   })
 })
-
