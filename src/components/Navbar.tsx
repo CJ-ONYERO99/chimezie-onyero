@@ -1,45 +1,67 @@
 "use client"
 import Link from 'next/link'
-import ThemeToggle from './ui/ThemeToggle'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { clsx } from 'clsx'
 
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/portfolio', label: 'My Portfolio' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/resume', label: 'Resume' },
+const links = [
+  { href: '/', label: 'Home', icon: 'ri-home-line' },
+  { href: '/about', label: 'About', icon: 'ri-user-line' },
+  { href: '/portfolio', label: 'My Portfolio', icon: 'ri-folder-line' },
+  { href: '/blog', label: 'Blog', icon: 'ri-article-line' },
+  { href: '/services', label: 'Services', icon: 'ri-code-line' },
+  { href: '/contact', label: 'Contact', icon: 'ri-mail-line' },
+  { href: '/resume', label: 'Resume', icon: 'ri-file-user-line' }
 ]
 
 export default function Navbar() {
-  const currentPath = usePathname()
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const pathname = usePathname()
 
   return (
-    <nav className={`border-b border-[color:var(--border)] bg-[color:var(--surface)]/80 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--surface)]/70 sticky top-0 z-40 ${scrolled ? 'shadow-[0_1px_0_rgba(255,255,255,0.06)]' : ''}`}>
-      <div className="container flex items-center justify-between py-4">
-        <Link href="/" className="font-semibold">Chimezie Onyero</Link>
-        <ul className="hidden md:flex items-center gap-4" role="menubar">
-          {nav.map((n) => (
-            <li key={n.href} role="none">
-              <Link role="menuitem" aria-current={currentPath === n.href ? 'page' : undefined} className={`px-3 py-2 rounded-lg hover:bg-black/10 ${currentPath === n.href ? 'underline text-[color:var(--accent-cyan)]' : ''}`} href={n.href}>{n.label}</Link>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
+    <>
+      <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 nav-floating rounded-full px-8 py-3">
+        <div className="flex items-center gap-8">
+          <span className="orbitron text-sm uppercase tracking-[0.3em] text-[color:var(--brand-secondary)]">Cyber</span>
+          {links.map((link) => {
+            const active = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={clsx(
+                  'text-sm font-medium transition-colors duration-300',
+                  active ? 'text-[color:var(--brand-primary)]' : 'text-slate-100 hover:text-[color:var(--brand-primary)]'
+                )}
+                aria-current={active ? 'page' : undefined}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 nav-floating rounded-full px-6 py-3">
+        <div className="flex items-center gap-6 text-lg">
+          {links.map((link) => {
+            const active = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={clsx(
+                  'flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300',
+                  active
+                    ? 'bg-[color:var(--brand-primary)] text-black shadow-[0_0_20px_rgba(57,255,20,0.35)]'
+                    : 'text-slate-100 hover:text-[color:var(--brand-primary)]'
+                )}
+                aria-label={link.label}
+              >
+                <i className={link.icon}></i>
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
+    </>
   )
 }

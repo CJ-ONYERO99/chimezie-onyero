@@ -5,7 +5,7 @@ import type { Project } from '@/types/project'
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="card overflow-hidden h-full flex flex-col group motion-safe:transition-transform motion-safe:duration-200 hover:-translate-y-[2px] hover:ring-1 hover:ring-[color:var(--accent-cyan)]/40">
+    <div className="card overflow-hidden h-full flex flex-col group motion-safe:transition-transform motion-safe:duration-200 hover:-translate-y-[2px] hover:ring-1 hover:ring-[color:var(--brand-secondary)]/40">
       <div className="relative aspect-[16/9]">
         <Image src={project.cover || '/images/projects/placeholder.svg'} alt={`${project.title} cover`} fill className="object-cover transition-[filter] duration-200 group-hover:brightness-95" sizes="(max-width: 768px) 100vw, 33vw" />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="flex flex-wrap gap-2">
           {(project.tools || []).map((t) => <Badge key={t}>{t}</Badge>)}
         </div>
-        <ul className="list-disc pl-5 text-sm space-y-1 flex-1 marker:text-[color:var(--accent-cyan)]">
+        <ul className="list-disc pl-5 text-sm space-y-1 flex-1 marker:text-[color:var(--brand-primary)]">
           {(project.highlights || []).slice(0,5).map((h, i) => <li key={i}>{h}</li>)}
         </ul>
         <div className="mt-1 flex gap-3">

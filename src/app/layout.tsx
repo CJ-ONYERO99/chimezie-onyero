@@ -1,25 +1,26 @@
 import './globals.css'
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Orbitron, Poppins } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { buildDefaultMetadata, jsonLdPerson } from '@/lib/seo'
 import { headers } from 'next/headers'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron', weight: ['400', '500', '600', '700', '800', '900'] })
+const poppins = Poppins({ subsets: ['latin'], variable: '--font-poppins', weight: ['300', '400', '500', '600', '700'] })
 
 export const metadata: Metadata = buildDefaultMetadata()
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1A1F26' },
-  ],
+    { media: '(prefers-color-scheme: light)', color: '#050505' },
+    { media: '(prefers-color-scheme: dark)', color: '#050505' }
+  ]
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  // Read CSP nonce set in middleware (Next 15: headers() is async-typed)
   const hdrs = await headers()
   const nonce = hdrs.get('x-nonce') || undefined
   const themeScript = `
@@ -32,15 +33,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   `
 
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${inter.variable} ${orbitron.variable} ${poppins.variable}`}>
       <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+        <script nonce={nonce} src="https://unpkg.com/@phosphor-icons/web" defer />
         <script suppressHydrationWarning nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" nonce={nonce} dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }} />
       </head>
-      <body>
+      <body className="relative">
+        <div className="digital-noise" aria-hidden />
         <a href="#main" className="skip-link">Skip to content</a>
         <Navbar />
-        <main id="main" className="container py-16 md:py-20 min-h-[70vh]">{children}</main>
+        <main id="main" className="min-h-[70vh]">{children}</main>
         <Footer />
       </body>
     </html>

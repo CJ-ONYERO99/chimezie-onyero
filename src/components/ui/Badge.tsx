@@ -1,6 +1,6 @@
 export function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs bg-transparent border border-[color:var(--border)] text-[color:var(--text-primary)]">
+    <span className="inline-flex items-center rounded-full border border-[rgba(57,255,20,0.18)] bg-black/30 px-3 py-1 text-xs text-[color:var(--brand-secondary)]">
       {children}
     </span>
   )

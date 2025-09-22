@@ -8,29 +8,38 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        surface: '#1A1F26',
-        border: '#2A313A',
+        bg: {
+          DEFAULT: '#050505',
+        },
+        surface: {
+          DEFAULT: '#111111',
+          border: 'rgba(57, 255, 20, 0.25)',
+        },
         text: {
-          primary: '#E6EAF0',
-          muted: '#B6C0CC'
+          primary: '#f8fafc',
+          muted: '#94a3b8',
         },
-        accent: {
-          crimson: '#D9363E',
-          crimsonHover: '#F0464E',
-          cyan: '#00C4CC',
-          cyanHover: '#2AE6ED'
+        brand: {
+          primary: '#39ff14',
+          primaryHover: '#2cd90e',
+          secondary: '#00ff88',
+          secondaryHover: '#00d26a',
         },
-        focus: '#5BE3FF'
+        state: {
+          success: '#22c55e',
+          warning: '#f59e0b',
+          danger: '#ef4444',
+          focus: '#39ff14',
+        },
       },
       borderRadius: {
         xl: '1rem',
         '2xl': '1.25rem'
       },
       boxShadow: {
-        soft: '0 2px 10px rgba(0,0,0,0.12)'
+        soft: '0 0 30px rgba(57, 255, 20, 0.12)'
       }
     }
   },
   plugins: []
 }
-

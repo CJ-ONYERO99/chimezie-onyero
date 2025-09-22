@@ -1,121 +1,102 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Container } from '@/components/ui/Container'
-import { Section } from '@/components/ui/Section'
+import Link from 'next/link'
 
-type PortfolioProject = {
-  title: string
-  objective: string
-  tools: string
-  process: string[]
-  findings: string[]
-  reflection: string
-  placeholderCaption: string
-}
+export const metadata: Metadata = { title: 'Cyber Portfolio | Projects' }
 
-const PROJECTS: PortfolioProject[] = [
+const projects = [
   {
-    title: 'Investigating a Suspicious IP Address (Defensive Path)',
-    objective: 'Analyze a suspicious login attempt by investigating the IP address 102.165.36.250 to determine its origin and potential threat.',
-    tools: 'ipinfo.io, SecurityTrails',
-    process: [
-      'Collected the suspicious IP from a simulated login alert.',
-      'Queried the IP address on ipinfo for geolocation, ISP, and hostname details.',
-      'Entered the IP into SecurityTrails for domain associations and hosting information.',
-      'Compared the findings with normal user activity.'
-    ],
-    findings: [
-      'IP registered in [insert country] and associated with [organization/hosting provider].',
-      'Likely a server/data center, suggesting possible automated or malicious use.'
-    ],
-    reflection: 'Learned initial SOC triage and how to distinguish normal user traffic from suspicious hosts.',
-    placeholderCaption: 'Replace with your screenshot of ipinfo/SecurityTrails.'
+    title: 'Suspicious Login Investigation (SOC Lab)',
+    description:
+      'Triaged a simulated alert by enriching IP 102.165.36.250 with OSINT sources, correlating activity, and delivering a response plan that balanced speed with evidence.',
+    cta: { href: '/contact', label: 'Request Case Notes' }
   },
   {
-    title: 'Finding a Hidden Flag in a Website (Offensive Path)',
-    objective: 'Identify hidden information in a website’s source code.',
-    tools: 'Web browser (Chrome/Brave/Safari)',
-    process: [
-      'Viewed Page Source.',
-      'Used Ctrl+F (Cmd+F) to search for “flag”.',
-      'Reviewed HTML comments and hidden tags.'
-    ],
-    findings: ['flag{h1dd3n_1n_pl41n_s1ght}'],
-    reflection: 'Shows how recon starts with source-code review and reinforces secure coding and code reviews.',
-    placeholderCaption: 'Replace with your screenshot of source code + flag.'
+    title: 'Hidden Flag Recon Exercise',
+    description:
+      'Performed client-side reconnaissance to uncover embedded secrets, documenting secure coding recommendations for the delivery team.',
+    cta: { href: '/contact', label: 'Discuss Findings' }
   },
   {
-    title: 'Domain Intelligence Gathering (OSINT Path)',
-    objective: 'Perform DNS enumeration on ibm.com to understand its infrastructure.',
-    tools: 'MXToolbox SuperTool',
-    process: [
-      'Entered ibm.com into MXToolbox SuperTool.',
-      'Ran a DNS Check to find IP addresses.',
-      'Retrieved MX Records for IBM’s mail servers.',
-      'Noted additional DNS records for insights.'
-    ],
-    findings: [
-      'Multiple IPs indicate redundancy/load balancing.',
-      'MX Records show secure, distributed email routing for a large enterprise.'
-    ],
-    reflection: 'Intro to digital footprinting via open-source DNS data.',
-    placeholderCaption: 'Replace with your screenshot from MXToolbox.'
+    title: 'Domain Intelligence Playbook',
+    description:
+      'Mapped the public footprint of ibm.com using DNS enumeration and MX analysis, surfacing resilience insights and communication patterns for briefing stakeholders.',
+    disabled: true
+  }
+]
+
+const gallery = [
+  {
+    title: 'Incident Report Layout',
+    description: 'Template used to capture investigation scope, artefacts, risk ratings, and next actions for SOC stakeholders.',
+    image: '/images/cyber/sky.jpg'
+  },
+  {
+    title: 'RFID Security Research',
+    description: 'Poster summarising my undergraduate RFID project, highlighting threat models and mitigation strategies.',
+    image: '/images/cyber/chimezie-logo.svg'
   }
 ]
 
 export default function PortfolioPage() {
   return (
-    <Container>
-      <Section title="My Portfolio" subtitle="Selected cybersecurity‑oriented samples and case studies">
-        <div className="space-y-12">
-          {PROJECTS.map((project, index) => (
-            <article key={project.title} className="card p-6 md:p-8 space-y-6">
-              <header className="space-y-3">
-                <h3 className="text-2xl font-semibold text-[color:var(--text-primary)]">{project.title}</h3>
-                <div className="space-y-1 text-sm text-[color:var(--text-muted)]">
-                  <p><span className="font-semibold text-[color:var(--text-primary)]">Objective:</span> {project.objective}</p>
-                  <p><span className="font-semibold text-[color:var(--text-primary)]">Tools:</span> {project.tools}</p>
-                </div>
-              </header>
+    <div className="space-y-20 pb-24 pt-24">
+      <section className="px-4">
+        <div className="mx-auto max-w-5xl space-y-6 text-center">
+          <h1 className="orbitron text-4xl font-bold text-white sm:text-6xl">
+            PROJECT <span className="text-[color:var(--brand-primary)]">DOSSIER</span>
+          </h1>
+          <p className="text-lg text-slate-300">
+            A growing collection of cybersecurity investigations, research notes, and tooling experiments that blend engineering rigour with
+            practical defence.
+          </p>
+        </div>
+      </section>
 
-              <figure className="overflow-hidden rounded-xl border border-dashed border-[color:var(--border)] bg-[color:var(--surface)]">
-                <Image
-                  src={`/images/placeholders/portfolio-${index + 1}.png`}
-                  alt="Screenshot placeholder"
-                  width={1200}
-                  height={675}
-                  className="h-full w-full object-cover"
-                />
-                <figcaption className="px-4 py-3 text-center text-sm text-[color:var(--text-muted)]">{project.placeholderCaption}</figcaption>
-              </figure>
-
+      <section className="px-4">
+        <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <div key={project.title} className="glass group flex h-full flex-col justify-between rounded-2xl border border-[rgba(57,255,20,0.2)] p-6 transition-transform duration-300 hover:-translate-y-2 hover:glow-green">
               <div className="space-y-4">
-                <div>
-                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Process</h4>
-                  <ol className="list-decimal pl-5 space-y-2 text-sm text-[color:var(--text-muted)]">
-                    {project.process.map((step) => (
-                      <li key={step}>{step}</li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div>
-                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Findings</h4>
-                  <ul className="list-disc pl-5 space-y-2 text-sm text-[color:var(--text-muted)]">
-                    {project.findings.map((finding) => (
-                      <li key={finding}>{finding}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="text-lg font-semibold text-[color:var(--text-primary)]">Reflection</h4>
-                  <p className="text-[color:var(--text-muted)]">{project.reflection}</p>
-                </div>
+                <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                <p className="text-sm text-slate-300">{project.description}</p>
               </div>
-            </article>
+              <div className="pt-6">
+                {project.disabled ? (
+                  <span className="inline-flex items-center justify-center rounded-button border border-[color:var(--brand-primary)] px-6 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--brand-primary)] opacity-60">
+                    Coming Soon
+                  </span>
+                ) : (
+                  <Link
+                    href={project.cta?.href ?? '#'}
+                    className="inline-flex items-center justify-center rounded-button bg-[color:var(--brand-primary)] px-6 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    {project.cta?.label ?? 'Explore'}
+                  </Link>
+                )}
+              </div>
+            </div>
           ))}
         </div>
-      </Section>
-    </Container>
+      </section>
+
+      <section className="px-4">
+        <div className="mx-auto max-w-6xl space-y-12">
+          {gallery.map((item) => (
+            <div key={item.title} className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
+              <div className="relative h-72 overflow-hidden rounded-2xl border border-[rgba(57,255,20,0.2)] bg-black/50 shadow-[0_0_40px_rgba(57,255,20,0.12)] sm:h-96">
+                <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 55vw" />
+              </div>
+              <div className="flex flex-col justify-center space-y-4">
+                <h2 className="orbitron text-2xl font-semibold text-white">{item.title}</h2>
+                <p className="text-sm text-slate-300">{item.description}</p>
+                <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--brand-primary)]">Research Archive</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   )
 }
+

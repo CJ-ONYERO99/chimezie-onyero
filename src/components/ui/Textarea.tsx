@@ -1,10 +1,14 @@
-export function Textarea({ label, ...props }: { label: string } & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export function Textarea({ label, rows = 4, ...props }: { label: string; rows?: number } & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   const id = props.id || props.name || label.replace(/\s+/g, '-').toLowerCase()
   return (
     <div className="space-y-1">
-      <label htmlFor={id} className="block text-sm font-medium">{label}</label>
-      <textarea id={id} {...props}
-                className="w-full rounded-xl px-3 py-2 bg-transparent border border-[color:var(--border)] text-[color:var(--text-primary)]" />
+      <label htmlFor={id} className="block text-sm font-medium text-[color:var(--text-muted)]">{label}</label>
+      <textarea
+        id={id}
+        rows={rows}
+        {...props}
+        className="w-full rounded-xl border border-[rgba(57,255,20,0.18)] bg-black/40 px-3 py-2 text-[color:var(--text-primary)] shadow-[0_0_20px_rgba(0,0,0,0.35)] transition focus:border-[color:var(--brand-primary)] focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-primary)]"
+      />
     </div>
   )
 }
