@@ -27,14 +27,14 @@ export default function HomePage() {
         <div className="particle" style={{ top: '52%', left: '6%', animationDelay: '4s' }} aria-hidden />
 
         <div className="relative mb-10 inline-block">
-          <div className="relative mx-auto flex h-36 w-36 items-center justify-center overflow-hidden rounded-full sm:h-40 sm:w-40">
+          <div className="relative mx-auto flex h-48 w-48 items-center justify-center overflow-hidden rounded-full sm:h-56 sm:w-56">
             <Image
-              src="/images/cyber/chimezie-logo.svg"
+              src="/images/cyber/CO-LG.png"
               alt="Chimezie Onyero logo"
               fill
-              className="object-cover object-top"
+              className="object-contain"
               priority
-              sizes="(max-width: 640px) 9rem, 10rem"
+              sizes="(max-width: 640px) 12rem, 14rem"
             />
             <span className="absolute inset-0 rounded-full border-4 border-[color:var(--brand-primary)] glow-green-strong animate-pulse" aria-hidden />
           </div>
