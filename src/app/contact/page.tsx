@@ -60,15 +60,17 @@ export default function ContactPage() {
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
-                href="mailto:theyeroverse@gmail.com"
+                href="https://x.com/CartelJozzy"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="glass flex h-12 w-12 items-center justify-center rounded-full text-[color:var(--brand-primary)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(57,255,20,0.25)]"
-                aria-label="Email"
+                aria-label="X (Twitter)"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
+                  <path d="M4 4l11.733 16h4.267l-11.733-16z"></path>
+                  <path d="M4 20l6.768-6.768m2.46-2.46L20 4"></path>
                 </svg>
-                <span className="sr-only">Email</span>
+                <span className="sr-only">X (Twitter)</span>
               </a>
             </div>
           </div>

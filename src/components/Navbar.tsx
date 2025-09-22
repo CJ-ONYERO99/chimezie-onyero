@@ -9,8 +9,8 @@ const links = [
   { href: '/portfolio', label: 'My Portfolio', icon: 'ri-folder-line' },
   { href: '/blog', label: 'Blog', icon: 'ri-article-line' },
   { href: '/services', label: 'Services', icon: 'ri-code-line' },
-  { href: '/contact', label: 'Contact', icon: 'ri-mail-line' },
-  { href: '/resume', label: 'Resume', icon: 'ri-file-user-line' }
+  { href: '/resume', label: 'Resume', icon: 'ri-file-user-line' },
+  { href: '/contact', label: 'Contact', icon: 'ri-mail-line' }
 ]
 
 export default function Navbar() {
