@@ -46,8 +46,12 @@ export default function AboutPage() {
           <h1 className="orbitron text-4xl font-bold text-white sm:text-6xl">
             ABOUT <span className="text-[color:var(--brand-primary)]">ME</span>
           </h1>
-          <div className="mx-auto mt-6 flex h-48 w-48 items-center justify-center rounded-full border border-[rgba(57,255,20,0.25)] bg-black/40 shadow-[0_0_30px_rgba(57,255,20,0.12)]">
-            <span className="text-xs uppercase tracking-[0.35em] text-[color:var(--text-muted)]">Portrait coming soon</span>
+          <div className="mx-auto mt-6 flex h-48 w-48 items-center justify-center rounded-full border border-[rgba(57,255,20,0.25)] bg-black/40 shadow-[0_0_30px_rgba(57,255,20,0.12)] overflow-hidden">
+            <img 
+              src="/images/PF1.png" 
+              alt="Chimezie Onyero" 
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </section>
