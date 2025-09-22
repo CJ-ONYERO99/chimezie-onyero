@@ -34,10 +34,10 @@ export function buildCsp(nonce: string) {
   const directives = [
     `default-src 'self'`,
     `script-src 'self' 'nonce-${nonce}'`,
-    `style-src 'self' 'nonce-${nonce}'`,
-    `img-src 'self' data:`,
+    `style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com`,
+    `img-src 'self' data: https://cdn.jsdelivr.net`,
     `connect-src 'self'`,
-    `font-src 'self'`,
+    `font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com`,
     `frame-ancestors 'none'`,
     `base-uri 'self'`,
     `form-action 'self'`
