@@ -29,12 +29,12 @@ const gallery = [
   {
     title: 'Incident Report Layout',
     description: 'Template used to capture investigation scope, artefacts, risk ratings, and next actions for SOC stakeholders.',
-    image: '/images/cyber/sky.jpg'
+    image: '/images/cyber/cool.jpg'
   },
   {
     title: 'RFID Security Research',
     description: 'Poster summarising my undergraduate RFID project, highlighting threat models and mitigation strategies.',
-    image: '/images/cyber/chimezie-logo.svg'
+    image: '/images/cyber/download.png'
   }
 ]
 
